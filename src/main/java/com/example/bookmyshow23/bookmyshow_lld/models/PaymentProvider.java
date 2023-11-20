@@ -5,7 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SeatType extends BaseModel{
-    private String name;
-
+public class PaymentProvider extends BaseModel{
+    
 }
