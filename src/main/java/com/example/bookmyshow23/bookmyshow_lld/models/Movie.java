@@ -10,5 +10,7 @@ import lombok.Setter;
 
 public class Movie extends BaseModel{
     String name;
-    List<String> actors;
+
+
+    //List<String> actors;
 }

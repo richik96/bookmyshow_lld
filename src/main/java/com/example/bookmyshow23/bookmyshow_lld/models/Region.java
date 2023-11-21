@@ -1,8 +1,9 @@
 package com.example.bookmyshow23.bookmyshow_lld.models;
 
-import org.hibernate.mapping.List;
+import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,8 @@ import lombok.Setter;
 
 public class Region extends BaseModel{
     private String name;
+
+    @OneToMany
     private List<Theatre> theatre;
      
 }

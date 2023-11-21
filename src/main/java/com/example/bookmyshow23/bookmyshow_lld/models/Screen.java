@@ -1,17 +1,28 @@
 package com.example.bookmyshow23.bookmyshow_lld.models;
 
-import org.hibernate.mapping.List;
+import java.util.List;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 
 public class Screen extends BaseModel{
     private String name;
+
+    @OneToMany
     private List<Seat> seats;
-    private List<ScreenFeatures> screenFeatures;
+
+    @Enumerated(EnumType.ORDINAL)
+    @ElementCollection
+    private List<ScreenFeature> screenFeatures;
     
 
 }
