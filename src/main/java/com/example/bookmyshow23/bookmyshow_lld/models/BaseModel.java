@@ -10,7 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter@MappedSuperclass
+@Setter
+@MappedSuperclass
 
 public class BaseModel {
 

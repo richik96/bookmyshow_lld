@@ -9,7 +9,7 @@ import lombok.Setter;
 @Entity
 
 public class Movie extends BaseModel{
-    String name;
+    private String name;
 
 
     //List<String> actors;

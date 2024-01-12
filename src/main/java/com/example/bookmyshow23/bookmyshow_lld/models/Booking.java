@@ -1,12 +1,13 @@
 package com.example.bookmyshow23.bookmyshow_lld.models;
 
-import jakarta.persistence.ElementCollection;
+//import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +30,7 @@ public class Booking extends BaseModel{
     private List<Payment> payments;
 
     @Enumerated(EnumType.ORDINAL)
-    @ElementCollection
+    //@ElementCollection
     private BookingStatus bookingStatus;
 
     @ManyToOne

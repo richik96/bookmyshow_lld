@@ -2,7 +2,6 @@ package com.example.bookmyshow23.bookmyshow_lld.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
