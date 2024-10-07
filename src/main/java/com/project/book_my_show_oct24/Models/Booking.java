@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -21,6 +23,8 @@ public class Booking extends BaseModel{
 
     @OneToMany          //1 booking can have many payment option. 1 payment can do 1 booking only
     private List<Payment> payments;
+
+    @Enumerated(EnumType.ORDINAL)           //ORM represents enums as 1, 2....
     private BookingStatus bookingStatus;
 
     @ManyToOne          //1booking can belong to 1 user. 1 user can do many booking

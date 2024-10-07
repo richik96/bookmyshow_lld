@@ -2,7 +2,10 @@ package com.project.book_my_show_oct24.Models;
 
 import java.util.List;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
@@ -14,7 +17,8 @@ public class Screen extends BaseModel{
 
     @OneToMany
     private List<Seat> seats;
-    
-    private List<ScreenFeature> screenFeatures;
-    private ScreenFeature screenFeature;
+
+    @Enumerated(EnumType.ORDINAL)
+    @ElementCollection                              //basically represents list of enums
+    private List<ScreenFeatures> screenFeatures;
 }

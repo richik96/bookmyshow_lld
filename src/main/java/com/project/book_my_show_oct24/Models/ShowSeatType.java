@@ -1,5 +1,17 @@
 package com.project.book_my_show_oct24.Models;
 
-public class ShowSeatType {
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
 
+@Data
+@Entity
+public class ShowSeatType extends BaseModel{
+
+    @ManyToOne
+    private Show show;
+    
+    @ManyToOne
+    private SeatType seatType;
+    private int price;
 }
