@@ -12,9 +12,10 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 
+    @Override         
     Optional<User> findById(Long userId);           //optional class prevents a empty object to throw null point exception by isPresent() method
 
-    List<User> findByEmail(String email);           //internally JPA creates the sql query for you
+    Optional<User> findByEmail(String email);           //internally JPA creates the sql query for you
 
 
     /*
@@ -24,4 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
      * 2. Extend the Repository Interface with JpaRepository.
      * 
      */
+
+     User save(User user);
+
 }

@@ -3,6 +3,10 @@ package com.project.book_my_show_oct24.services;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.project.book_my_show_oct24.Models.User;
 import com.project.book_my_show_oct24.exceptions.InvalidUserException;
 import com.project.book_my_show_oct24.repos.UserRepository;
@@ -25,12 +29,22 @@ public class UserService {
         User user = new User();
         user.setBookings(new ArrayList<>());
         user.setEmail(emailId);
-        user.setPassword(password);
+
+        //before we store the password to DB, we should encrypt it using BCrypt
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+
         //save the user to the DB
         userRepository.save(user);
+        return user;
     }
 
-    public User login(String emailId, String password) {
-        return null;
+    public boolean login(String emailId, String password) {
+        Optional<User> optionalUser = userRepository.findByEmail(emailId);
+
+        String passwordStoredInDB = optionalUser.get().getPassword();
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        return bCryptPasswordEncoder.matches(password, passwordStoredInDB);
     }
 }

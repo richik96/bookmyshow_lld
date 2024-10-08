@@ -3,7 +3,11 @@ package com.project.book_my_show_oct24.Models;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
@@ -13,10 +17,11 @@ import lombok.Data;
 
 @Data
 @Entity             //signals ORM to map this to a table in DB
+@EntityListeners(AuditingEntityListener.class)
 public class Booking extends BaseModel{
 
     @ManyToMany         //1 booking can have many seats. on certain conditions, 1 seat can have many bookings
-    private List<Seat> seats;
+    private List<ShowSeat> seats;
 
     @ManyToOne          //1 booking can have 1 show. 1 show will have many booking
     private Show show;
@@ -28,6 +33,7 @@ public class Booking extends BaseModel{
     private BookingStatus bookingStatus;
 
     @ManyToOne          //1booking can belong to 1 user. 1 user can do many booking
+    @CreatedBy
     private User user;
     private int price;
     private Date timeOfBooking;

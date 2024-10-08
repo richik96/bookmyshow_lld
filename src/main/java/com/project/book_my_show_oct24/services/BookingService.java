@@ -1,6 +1,7 @@
 package com.project.book_my_show_oct24.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.book_my_show_oct24.Models.Booking;
+import com.project.book_my_show_oct24.Models.BookingStatus;
 import com.project.book_my_show_oct24.Models.SeatStatus;
 import com.project.book_my_show_oct24.Models.Show;
 import com.project.book_my_show_oct24.Models.ShowSeat;
@@ -28,14 +30,16 @@ public class BookingService {
     private UserRepository userRepository;
     private ShowRepository showRepository;
     private ShowSeatRepository showSeatRepository;
+    private PriceCalculator priceCalculator;
 
     
     @Autowired
     public BookingService(UserRepository userRepository, ShowRepository showRepository,
-            ShowSeatRepository showSeatRepository) {
+            ShowSeatRepository showSeatRepository, PriceCalculator priceCalculator) {
         this.userRepository = userRepository;
         this.showRepository = showRepository;
         this.showSeatRepository = showSeatRepository;
+        this.priceCalculator = priceCalculator;
     }
 
     public Booking bookMovie(Long userId, Long showId, List<Long> showSeatIds) throws InvalidUserException, InvalidShowException, InvalidShowSeatException {
@@ -74,6 +78,17 @@ public class BookingService {
             //save the data in DB
             finalShowSeats.add(showSeatRepository.save(showSeat));
         }
+
+        //create a booking object
+        Booking booking = new Booking();
+        booking.setBookingStatus(BookingStatus.PENDING);
+        booking.setTimeOfBooking(new Date());
+        booking.setUser(user);
+        booking.setShow(show);
+        booking.setSeats(finalShowSeats);
+        booking.setPayments(new ArrayList<>());
+        booking.setPrice(priceCalculator.calculatePrice(show, finalShowSeats));
+
         return null;
     }
 }
