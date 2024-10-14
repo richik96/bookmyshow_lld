@@ -11,6 +11,6 @@ import com.project.book_my_show_oct24.Models.ShowSeatType;
 @Repository
 public interface ShowSeatTypeRepository extends JpaRepository<ShowSeatTypeRepository, Long>{
 
-    @Override
+    
     List<ShowSeatType> findAllByShow(Show show);
 }
